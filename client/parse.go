@@ -29,7 +29,7 @@ func findSample(body []byte) (input [][]byte, output [][]byte, err error) {
 		return nil, nil, fmt.Errorf("Cannot parse sample with input %v and output %v", len(a), len(b))
 	}
 
-	tagRegex := regexp.MustCompile(`<div[^>]*>|</div>`)
+	tagRegex := regexp.MustCompile(`<div class="[^"]*?[^"]*?">|<\/div>/`)
 	filter := func(src []byte) []byte {
 		src = tagRegex.ReplaceAll(src, []byte("\n"))
 		src = bytes.ReplaceAll(src, []byte("\n\n"), []byte("\n"))
